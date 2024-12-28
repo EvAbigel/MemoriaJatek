@@ -10,20 +10,70 @@ using System.Windows.Forms;
 
 namespace Memoria_Jatek
 {
-    //test 1
     public partial class Form1 : Form
     {
-        //test 1
+        static Random r = new Random();
+        Label[,] kartyak;
+        int valasz1 = 6;
+
         public Form1()
         {
-            //test 1
             InitializeComponent();
+            GenerateMemoria();
+            this.Text = "Memória Játék";
+
+            int meret = valasz1 * 65;
+            this.ClientSize = new Size(meret, meret);
         }
 
-        //test 1
+        public void GenerateMemoria()
+        {
+            kartyak = new Label[valasz1, valasz1];
+            int meret = 65;
 
-        //test 1
+            for (int i = 0; i < valasz1; i++)
+            {
+                for (int j = valasz1-1;  j >= 0; j--)
+                {
+                    kartyak[i, j] = new Label()
+                    {
+                        Width = meret,
+                        Height = meret,
+                        Left = j * meret,
+                        Top = i * meret,
+                        BorderStyle = BorderStyle.FixedSingle,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Font = new Font("Arial", 14),
+                        BackColor = Color.DarkCyan,
+                    };
 
-        //test 1
+                    kartyak[i, j].Click += Label_Click;
+                    this.Controls.Add(kartyak[i, j]);
+
+                }
+            }
+
+            Keveres();
+        }
+
+
+        private void Label_Click(object sender, EventArgs e)
+        {
+            Label clickedLabel = sender as Label;
+
+            for (int i = 0; i < valasz1; i++){
+                for (int j = valasz1 - 1; j >= 0; j--){
+                    if (kartyak[i, j] == clickedLabel){
+                        //valami valami
+                        return;
+                    }
+                }
+            }
+        }
+
+        public void Keveres()
+        {
+            //valami valami 2
+        }
     }
 }
