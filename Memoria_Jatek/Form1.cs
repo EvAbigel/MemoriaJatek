@@ -14,28 +14,30 @@ namespace Memoria_Jatek
     {
         static Random r = new Random();
         Label[,] kartyak;
-        int valasz1 = 6;
-        
+        int db = 6;
+        int szamok = 1;
 
         public Form1()
         {
             InitializeComponent();
+            Kezdes();
             GenerateMemoria();
-            Kerdesek();
+            timer1.Start();
             this.Text = "Memória Játék";
 
-            int meret = valasz1 * 65;
+            int meret = db * 65;
             this.ClientSize = new Size(meret, meret);
+           
         }
 
         public void GenerateMemoria()
         {
-            kartyak = new Label[valasz1, valasz1];
+            kartyak = new Label[db, db];
             int meret = 65;
 
-            for (int i = 0; i < valasz1; i++)
+            for (int i = 0; i < db; i++)
             {
-                for (int j = valasz1-1;  j >= 0; j--)
+                for (int j = db-1;  j >= 0; j--)
                 {
                     kartyak[i, j] = new Label()
                     {
@@ -47,6 +49,7 @@ namespace Memoria_Jatek
                         TextAlign = ContentAlignment.MiddleCenter,
                         Font = new Font("Arial", 14),
                         BackColor = Color.DarkCyan,
+                        Text = szamok.ToString(),
                     };
 
                     kartyak[i, j].Click += Label_Click;
@@ -63,8 +66,8 @@ namespace Memoria_Jatek
         {
             Label clickedLabel = sender as Label;
 
-            for (int i = 0; i < valasz1; i++){
-                for (int j = valasz1 - 1; j >= 0; j--){
+            for (int i = 0; i < db; i++){
+                for (int j = db - 1; j >= 0; j--){
                     if (kartyak[i, j] == clickedLabel){
                         //valami valami
                         return;
@@ -80,26 +83,64 @@ namespace Memoria_Jatek
 
         public void Kerdesek()
         {
-            int db = 0;
-            QuestionDialog qd = new QuestionDialog();
-            QuestionDialog2 ido = new QuestionDialog2();
+            int sec = 0;
+            int tizedesjgyek = 0;
 
-            if(qd.ShowDialog() == DialogResult.Yes)
+            QuestionDialog hany = new QuestionDialog();
+            QuestionDialog2 ido = new QuestionDialog2();
+            QuestionDialog3 szamjegy = new QuestionDialog3();
+
+            if(hany.ShowDialog() == DialogResult.Yes)
             {
                 db = 6;
                 ido.SzovegBeallit(db);
                 ido.ShowDialog();
-                int sec = ido.IdoMeghat(db);
-                MessageBox.Show(sec.ToString());
+                sec = ido.IdoMeghat(db);
+                timer1.Interval = sec * 1000;
             }
             else
             {
                 db = 9;
                 ido.SzovegBeallit(db);
                 ido.ShowDialog();
-                int sec = ido.IdoMeghat(db);
-                MessageBox.Show(sec.ToString());
+                sec = ido.IdoMeghat(db);
+                timer1.Interval = sec * 1000;
             }
+
+            if(szamjegy.ShowDialog() == DialogResult.Yes)
+            {
+                tizedesjgyek = 1;
+                
+            }
+            else
+            {
+                tizedesjgyek = 2;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            UpdateLabelText();
+            
+        }
+
+        public void UpdateLabelText()
+        {
+            for (int i = 0; i < db; i++)
+            {
+                for (int j = db - 1; j >= 0; j--)
+                {
+                    kartyak[i, j].Text = string.Empty;
+                }
+            }
+        }
+
+        public void Kezdes()
+        {
+            MessageBox.Show("Hello! Üdvőzőlek a játéban ahol a memoriádat fogjuk tesztelni. Készenálsz, hogy belevágj ebbe a nehéz feladatba?" ,"Bevezető szöveg", MessageBoxButtons.OK);
+            MessageBox.Show("Akkor kezdjük csak elöbb állítsuk be a nehézségi szintet.");
+            Kerdesek();
             
         }
     }

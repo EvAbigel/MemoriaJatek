@@ -20,3 +20,4 @@ C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.csproj.CoreCompileInputs.c
 C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.exe
 C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.pdb
 C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog2.resources
+C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog3.resources
