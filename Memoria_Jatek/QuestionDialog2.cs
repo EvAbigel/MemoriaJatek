@@ -21,27 +21,31 @@ namespace Memoria_Jatek
         {
             DialogResult = DialogResult.Yes;
         }
+        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.No;
+        }
+
         public int IdoMeghat(int db)
         {
             int ido = 0;
+
             if (db == 6)
             {
-                button1.Text = $"5 sec";
-                button2.Text = $"10 sec";
                 if (DialogResult == DialogResult.Yes)
                 {
                     ido = 5;
                 }
-                else
+                if (DialogResult == DialogResult.No)
                 {
                     ido = 10;
                 }
                 return ido;
             }
-            if(db == 9)
+            if (db == 9)
             {
-                button1.Text = $"10 sec";
-                button2.Text = $"20 sec";
                 if (DialogResult == DialogResult.Yes)
                 {
                     ido = 10;
@@ -53,12 +57,22 @@ namespace Memoria_Jatek
                 return ido;
             }
             return ido;
-            
+
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+        public void SzovegBeallit(int db)
         {
-            DialogResult = DialogResult.No;
+            if(db == 6)
+            {
+                button1.Text = $"5 sec";
+                button2.Text = $"10 sec";
+            }
+            else
+            {
+                button1.Text = $"10 sec";
+                button2.Text = $"20 sec";
+            }
         }
     }
 }

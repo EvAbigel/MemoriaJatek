@@ -87,6 +87,7 @@ namespace Memoria_Jatek
             if(qd.ShowDialog() == DialogResult.Yes)
             {
                 db = 6;
+                ido.SzovegBeallit(db);
                 ido.ShowDialog();
                 int sec = ido.IdoMeghat(db);
                 MessageBox.Show(sec.ToString());
@@ -94,6 +95,7 @@ namespace Memoria_Jatek
             else
             {
                 db = 9;
+                ido.SzovegBeallit(db);
                 ido.ShowDialog();
                 int sec = ido.IdoMeghat(db);
                 MessageBox.Show(sec.ToString());
