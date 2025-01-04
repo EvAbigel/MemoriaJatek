@@ -15,11 +15,13 @@ namespace Memoria_Jatek
         static Random r = new Random();
         Label[,] kartyak;
         int valasz1 = 6;
+        
 
         public Form1()
         {
             InitializeComponent();
             GenerateMemoria();
+            Kerdesek();
             this.Text = "Memória Játék";
 
             int meret = valasz1 * 65;
@@ -74,6 +76,29 @@ namespace Memoria_Jatek
         public void Keveres()
         {
             //valami valami 2
+        }
+
+        public void Kerdesek()
+        {
+            int db = 0;
+            QuestionDialog qd = new QuestionDialog();
+            QuestionDialog2 ido = new QuestionDialog2();
+
+            if(qd.ShowDialog() == DialogResult.Yes)
+            {
+                db = 6;
+                ido.ShowDialog();
+                int sec = ido.IdoMeghat(db);
+                MessageBox.Show(sec.ToString());
+            }
+            else
+            {
+                db = 9;
+                ido.ShowDialog();
+                int sec = ido.IdoMeghat(db);
+                MessageBox.Show(sec.ToString());
+            }
+            
         }
     }
 }
