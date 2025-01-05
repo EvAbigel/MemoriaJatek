@@ -21,3 +21,6 @@ C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.exe
 C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.pdb
 C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog2.resources
 C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog3.resources
+C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog.resources
+C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog2.resources
+C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog3.resources

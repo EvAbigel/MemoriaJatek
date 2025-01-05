@@ -13,9 +13,12 @@ namespace Memoria_Jatek
     public partial class Form1 : Form
     {
         static Random r = new Random();
-        Label[,] kartyak;
+        int minrandom;
+        int maxrandom;
+
+        Label[] kartyak;
         int db = 6;
-        int szamok = 1;
+        int[] randomszamok;
 
         public Form1()
         {
@@ -24,67 +27,11 @@ namespace Memoria_Jatek
             GenerateMemoria();
             timer1.Start();
             this.Text = "Memória Játék";
-
-            int meret = db * 65;
-            this.ClientSize = new Size(meret, meret);
-           
-        }
-
-        public void GenerateMemoria()
-        {
-            kartyak = new Label[db, db];
-            int meret = 65;
-
-            for (int i = 0; i < db; i++)
-            {
-                for (int j = db-1;  j >= 0; j--)
-                {
-                    kartyak[i, j] = new Label()
-                    {
-                        Width = meret,
-                        Height = meret,
-                        Left = j * meret,
-                        Top = i * meret,
-                        BorderStyle = BorderStyle.FixedSingle,
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Font = new Font("Arial", 14),
-                        BackColor = Color.DarkCyan,
-                        Text = szamok.ToString(),
-                    };
-
-                    kartyak[i, j].Click += Label_Click;
-                    this.Controls.Add(kartyak[i, j]);
-
-                }
-            }
-
-            Keveres();
-        }
-
-
-        private void Label_Click(object sender, EventArgs e)
-        {
-            Label clickedLabel = sender as Label;
-
-            for (int i = 0; i < db; i++){
-                for (int j = db - 1; j >= 0; j--){
-                    if (kartyak[i, j] == clickedLabel){
-                        //valami valami
-                        return;
-                    }
-                }
-            }
-        }
-
-        public void Keveres()
-        {
-            //valami valami 2
         }
 
         public void Kerdesek()
         {
             int sec = 0;
-            int tizedesjgyek = 0;
 
             QuestionDialog hany = new QuestionDialog();
             QuestionDialog2 ido = new QuestionDialog2();
@@ -93,6 +40,7 @@ namespace Memoria_Jatek
             if(hany.ShowDialog() == DialogResult.Yes)
             {
                 db = 6;
+                randomszamok = new int[db];
                 ido.SzovegBeallit(db);
                 ido.ShowDialog();
                 sec = ido.IdoMeghat(db);
@@ -101,6 +49,7 @@ namespace Memoria_Jatek
             else
             {
                 db = 9;
+                randomszamok = new int[db];
                 ido.SzovegBeallit(db);
                 ido.ShowDialog();
                 sec = ido.IdoMeghat(db);
@@ -109,15 +58,64 @@ namespace Memoria_Jatek
 
             if(szamjegy.ShowDialog() == DialogResult.Yes)
             {
-                tizedesjgyek = 1;
-                
+                minrandom = 0;
+                maxrandom = 10;
+
+                Tolt(minrandom, maxrandom);
+
             }
             else
             {
-                tizedesjgyek = 2;
+                minrandom = 10;
+                maxrandom = 100;
+
+                Tolt(minrandom, maxrandom);
             }
         }
 
+        public void GenerateMemoria()
+        {
+            kartyak = new Label[db];
+            int width = 85;
+            int height = 150;
+            int padding = 15;
+            int offset = width + padding;
+
+            for (int i = 0; i < db; i++)
+            {
+                kartyak[i] = new Label()
+                {
+                    Width = width,
+                    Height = height,
+                    Left = i * offset + padding,
+                    Top = padding,
+                    BorderStyle = BorderStyle.Fixed3D,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Arial", 14),
+                    BackColor = Color.DarkCyan,
+                    Name = randomszamok[i].ToString(),
+                    Text = randomszamok[i].ToString(),
+                };
+
+                kartyak[i].Click += Label_Click;
+                this.Controls.Add(kartyak[i]);
+            }
+
+            this.ClientSize = new Size(offset * db + padding, height + padding * 2);
+        }
+
+        private void Label_Click(object sender, EventArgs e)
+        {
+            Label clickedLabel = sender as Label;
+
+            for (int i = 0; i < db; i++){
+                if (kartyak[i] == clickedLabel)
+                {
+                    //valami valami
+                    return;
+                }
+            }
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -129,10 +127,7 @@ namespace Memoria_Jatek
         {
             for (int i = 0; i < db; i++)
             {
-                for (int j = db - 1; j >= 0; j--)
-                {
-                    kartyak[i, j].Text = string.Empty;
-                }
+                kartyak[i].Text = string.Empty;
             }
         }
 
@@ -141,7 +136,16 @@ namespace Memoria_Jatek
             MessageBox.Show("Hello! Üdvőzőlek a játéban ahol a memoriádat fogjuk tesztelni. Készenálsz, hogy belevágj ebbe a nehéz feladatba?" ,"Bevezető szöveg", MessageBoxButtons.OK);
             MessageBox.Show("Akkor kezdjük csak elöbb állítsuk be a nehézségi szintet.");
             Kerdesek();
-            
+        }
+
+
+
+        public void Tolt(int mini, int maxi)
+        {
+            for (int i = 0; i < randomszamok.Length; i++)
+            {
+                randomszamok[i] = r.Next(mini, maxi);
+            }
         }
     }
 }
