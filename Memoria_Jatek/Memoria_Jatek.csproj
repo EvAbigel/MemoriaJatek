@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bevezeto szoveg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bevezeto szoveg.Designer.cs">
+      <DependentUpon>Bevezeto szoveg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     <Compile Include="QuestionDialog3.Designer.cs">
       <DependentUpon>QuestionDialog3.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Bevezeto szoveg.resx">
+      <DependentUpon>Bevezeto szoveg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

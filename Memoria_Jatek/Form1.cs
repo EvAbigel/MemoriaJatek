@@ -23,31 +23,31 @@ namespace Memoria_Jatek
         int[] randomszamok;
 
         TextBox editBox = new TextBox();
+        int probalkozasok;
+        Label probalkozasLabel;
+
+        int elapsedSeconds = 0; 
+        int elapsedMinutes = 0;
 
         public Form1()
         {
             InitializeComponent();
-
-            editBox.Visible = false; 
-            editBox.Leave += EditBox_Leave;
-            editBox.KeyDown += EditBox_KeyDown;
-            this.Controls.Add(editBox);
-
+            EditBoxBeallit();
             Kezdes();
             GenerateMemoria(db);
             timer1.Start();
             this.Text = "Memória Játék";
 
-            verifyButton = new Button()
-            {
-                Text = "Verify",
-                Width = 100,
-                Height = 40,
-                Left = 10,
-                Top = 150
-            };
-            verifyButton.Click += VerifyButton_Click; 
-            this.Controls.Add(verifyButton);
+        }
+
+        public void EditBoxBeallit()
+        {
+            editBox.Visible = false;
+            editBox.Enabled = true;
+            editBox.ReadOnly = true;
+            editBox.Leave += EditBox_Leave;
+            editBox.KeyDown += EditBox_KeyDown;
+            this.Controls.Add(editBox);
         }
 
         public void Kerdesek()
@@ -60,6 +60,8 @@ namespace Memoria_Jatek
 
             if(hany.ShowDialog() == DialogResult.Yes)
             {
+                probalkozasok = 6;
+                
                 db = 6;
                 randomszamok = new int[db];
                 ido.SzovegBeallit(db);
@@ -69,6 +71,7 @@ namespace Memoria_Jatek
             }
             else
             {
+                probalkozasok = 9;
                 db = 9;
                 randomszamok = new int[db];
                 ido.SzovegBeallit(db);
@@ -122,18 +125,44 @@ namespace Memoria_Jatek
                     BackColor = Color.DarkCyan,
                     Name = randomszamok[i].ToString(),
                     Text = randomszamok[i].ToString(),
+
                 };
 
                 kartyak[i].Click += Label_Click;
                 this.Controls.Add(kartyak[i]);
             }
 
-            int oszlopSzam = (int)Math.Ceiling((double)db / sorok); 
-            this.ClientSize = new Size(sorok * offsetX + padding, oszlopSzam * offsetY + padding);
+            int oszlopSzam = (int)Math.Ceiling((double)db / sorok);
+            verifyButton = new Button()
+            {
+                Text = "Ellenőrzés",
+                Width = 100,
+                Height = 40,
+                Left = 10,
+                Top = oszlopSzam * offsetY + padding,
+                Enabled = false,
+            };
+            verifyButton.Click += VerifyButton_Click;
+            this.Controls.Add(verifyButton);
+
+            this.ClientSize = new Size(sorok * offsetX + padding, verifyButton.Top + verifyButton.Height + padding);
+
+
+            probalkozasLabel = new Label()
+            {
+                Text = $"Hátralévő próbálkozások száma: {probalkozasok}",
+                AutoSize = true,
+                Left = verifyButton.Left + verifyButton.Width + 10,
+                Top = verifyButton.Top
+            };
+
+            this.Controls.Add(probalkozasLabel);
         }
 
         private void Label_Click(object sender, EventArgs e)
         {
+            if (editBox.ReadOnly == true) return;
+
             Label clickedLabel = sender as Label;
             if (clickedLabel != null)
             {
@@ -149,6 +178,8 @@ namespace Memoria_Jatek
         {
             timer1.Stop();
             UpdateLabelText();
+            verifyButton.Enabled = true;
+            editBox.ReadOnly = false;
             
         }
 
@@ -162,12 +193,21 @@ namespace Memoria_Jatek
 
         public void Kezdes()
         {
-            MessageBox.Show("Hello! Üdvőzőlek a játéban ahol a memoriádat fogjuk tesztelni. Készenálsz, hogy belevágj ebbe a nehéz feladatba?" ,"Bevezető szöveg", MessageBoxButtons.OK);
-            MessageBox.Show("Akkor kezdjük csak elöbb állítsuk be a nehézségi szintet.");
-            Kerdesek();
+            Bevezeto_szoveg kezdes = new Bevezeto_szoveg();
+            if(kezdes.ShowDialog() == DialogResult.Yes)
+            {
+                MessageBox.Show("Akkor kezdjük csak elöbb állítsuk be a nehézségi szintet.", "Beállítások");
+                Kerdesek();
+                MessageBox.Show("Megfognak jelenni kártyák előtted amin lesznek számok az általad beállított ideig láthatod őket utána a számok eltűnnek és a kártyákra rákattinthatsz és beléjük írhatsz számokat amiket enter lenyomással okézol le.");
+                timer2.Start();
+            }
+            else
+            {
+                this.Close();
+            }
+            
+            
         }
-
-
 
         public void Tolt(int mini, int maxi)
         {
@@ -197,7 +237,15 @@ namespace Memoria_Jatek
         {
             if (e.KeyCode == Keys.Enter)
             {
+                probalkozasok--;
+                probalkozasLabel.Text = $"Hátralévő próbálkozások száma: {probalkozasok}"; 
+                e.SuppressKeyPress = true;
                 EditBox_Leave(sender, e);
+                if(probalkozasok == 0)
+                {
+                    MessageBox.Show("Elfogytak a probálkozásaid!");
+                    VerifyButton_Click(sender, e);
+                }
             }
         }
 
@@ -220,17 +268,50 @@ namespace Memoria_Jatek
 
             if (allCorrect)
             {
-                MessageBox.Show("All labels are correct!");
+                MessageBox.Show($"Minden tökéletes gratulálok! Megoldásra forditott idő:{elapsedMinutes} perc és {elapsedSeconds} másodperc");
+                timer2.Stop();
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Some labels are incorrect. Try again!");
+                MessageBox.Show("Van hibás szám!");
+                DialogResult result = MessageBox.Show("Tudni szeretnéd a jó megoldást?(igen) Vagy újra probálod(nem)?", "Mi legyen?", MessageBoxButtons.YesNo);
+                if(result == DialogResult.No)
+                {
+                    ResetLabels();
+                    probalkozasok = db;
+                    probalkozasLabel.Text = $"Hátralévő próbálkozások száma: {probalkozasok}";
+                }
+                else
+                {
+                    for (int i = 0; i < db; i++) {
+                        if (kartyak[i].BackColor == Color.Red) {
+                            kartyak[i].Text = randomszamok[i].ToString();
+                        }
+                    }
+                }
+                editBox.ReadOnly = true;
+                verifyButton.Enabled = false;
             }
         }
 
+        public void ResetLabels() {
+            for (int i = 0; i < db; i++) {
+                kartyak[i].Text = randomszamok[i].ToString();
+                kartyak[i].BackColor = Color.DarkCyan; 
+            } 
+            editBox.ReadOnly = true; 
+            verifyButton.Enabled = false; 
+            timer1.Start(); 
+        }
 
-        //teendő: labelbe való írás -> verifikálás, valami gomb ami indítja a verifikálást
-        //ötlet: label név: válasz (már meg van), ha input = válasz, akkor jó
-        //+ kéne még a próbálkozás counter, ha 0 akkor egyből indítja a verifikációt
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            elapsedSeconds++;
+            if (elapsedSeconds == 60) {
+                elapsedMinutes++;
+                elapsedSeconds = 0; 
+            }
+        }
     }
 }

@@ -24,3 +24,17 @@ C:\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog3.resources
 C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog.resources
 C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog2.resources
 C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog3.resources
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\bin\Debug\Memoria_Jatek.exe.config
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\bin\Debug\Memoria_Jatek.exe
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\bin\Debug\Memoria_Jatek.pdb
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.csproj.AssemblyReference.cache
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.Form1.resources
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.Properties.Resources.resources
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog.resources
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog2.resources
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.QuestionDialog3.resources
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.csproj.GenerateResource.cache
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.csproj.CoreCompileInputs.cache
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.exe
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.pdb
+C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.Bevezeto_szoveg.resources
