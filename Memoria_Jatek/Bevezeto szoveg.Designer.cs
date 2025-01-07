@@ -39,8 +39,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(339, 139);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Hello! Üdvőzőlek a játéban ahol a memoriádat fogjuk tesztelni. Készenálsz, hogy b" +
-    "elevágj ebbe a nehéz feladatba?";
+            this.label1.Text = "Hello! Üdvözöllek a játékban ahol a memóriádat fogjuk tesztelni. Készen állsz, ho" +
+    "gy belevágj ebbe a nehéz feladatba?";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
@@ -65,7 +65,7 @@
             // 
             // Bevezeto_szoveg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(363, 357);
             this.ControlBox = false;

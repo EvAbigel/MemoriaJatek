@@ -38,3 +38,4 @@ C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.csproj.CoreCo
 C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.exe
 C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.pdb
 C:\MemoriaJatek\MemoriaJatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.Bevezeto_szoveg.resources
+C:\Users\osasm\Dropbox\My PC (LAPTOP-GAH6IJ1F)\Desktop\C# feladat\Memoria_Jatek\Memoria_Jatek\obj\Debug\Memoria_Jatek.Bevezeto_szoveg.resources
